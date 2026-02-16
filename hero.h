@@ -1,8 +1,6 @@
 #pragma once
-
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 class Hero {
@@ -19,20 +17,21 @@ public:
 
 Hero();
 Hero(string n);
-Hero(string n, float health);
+Hero(string n, float h);
+Hero(string n, float h, int a);
 Hero(string n, float h, int a, string w);
 
-void setHeroName(string n){ heroName = n;}
+void setHeroName(string n) { heroName = n;}
 string getHeroName(){return heroName;}
 
-void setHealth(float h){ health = h;}
+void setHealth(float h) {health = h;}
 float getHealth(){return health;}
 
-void setAttack(int a){ attack = a;}
+void setAttack(int a) {attack = a;}
 int getAttack(){return attack;};
 
-void setWeakness(string w){ weakness = w;}
-string getWeakness(){return weakness;};
+void setWeakness(string w) {weakness = w;}
+string getWeakness(){return weakness;}
 
 void displayHeroInfo();
 };
@@ -43,4 +42,4 @@ Hero::Hero(){
     attack = 10;
     weakness = "None";
     heroCount++;
-}
+};
