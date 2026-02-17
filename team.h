@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "hero.h"
+#include "captain.h"
 
 using namespace std;
 
@@ -15,12 +16,13 @@ private:
     const static int MAX_HEROES = 10;
     int teamCount = 0;
     Hero teamHeroes[MAX_HEROES];
-    
+
 public:
     Team();
     Team(string name);
     void addHero(Hero h);
     void displayTeamInfo();
+    
 };
 
 Team::Team() {

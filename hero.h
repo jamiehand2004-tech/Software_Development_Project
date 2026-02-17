@@ -12,6 +12,8 @@ float health;
 int attack;
 string weakness;
 int heroCount = 0;
+bool captainStatus = false;
+bool isAlive = true;
 
 public:
 
@@ -32,6 +34,12 @@ int getAttack(){return attack;};
 
 void setWeakness(string w) {weakness = w;}
 string getWeakness(){return weakness;}
+
+void setCaptainStatus(bool s) {captainStatus = s;}
+bool getCaptainStatus() {return captainStatus;}
+
+void setAlive(bool status) {isAlive = status;}
+bool getAlive() {return isAlive;}
 
 void displayHeroInfo();
 };
