@@ -1,7 +1,6 @@
-/*  Header file for the Hero class,
+/*  Header file for the Hero class, which includes constructors and member functions,
     which defines the properties of hero characters in our Hero-Agency-Management project.
 */
-
 
 #pragma once
 #include <iostream>

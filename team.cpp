@@ -1,3 +1,9 @@
+/* 
+    Implementation file for the Team class, including constructors and member functions,
+    which defines the properties of teams in our Hero-Agency-Management project.
+*/
+
+
 #include "team.h"
 #include "hero.h"
 #include "captain.h"

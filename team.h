@@ -46,8 +46,9 @@ public:// Public member functions
     void addHero(Hero h); // Function to add a hero to the team
     void displayTeamInfo(); // Function to display information about the team
     void displayCaptainInfo(); // Function to display information about the captain of the team
-    
+
 };
+
 
 Team::Team() { // Default constructor implementation
 

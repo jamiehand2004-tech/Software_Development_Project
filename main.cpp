@@ -1,4 +1,5 @@
-/*  Main file for the Hero-Agency-Management project,
+/*  
+    Main file for the Hero-Agency-Management project,
     which demonstrates the creation and management of heroes, teams, and captains.
 */
 
@@ -14,7 +15,7 @@ using namespace std;
 int main() {
     // Create heroes
     Hero hero1("Superman", 100.0, 50, "Kryptonite");
-    Hero hero2("Batman", 80.0, 30, "None");
+    Hero hero2("Batman", 80.0, 30, "Himself");
     Hero hero3("Wonder Woman ", 90.0, 40, "Ropes");
     Hero hero4("Flash", 70.0, 35, "Cold");
     Hero hero5("Green Lantern", 85.0, 45, "Yellow");
@@ -26,7 +27,12 @@ int main() {
     Hero hero11("Frieren", 90.0, 50, "Wakey Wakey");
     Hero hero12("Kiora", 85.0, 40, "The Heart");
     Hero hero13("Saitama", 100.0, 100, "Boredom");
+    Hero hero14("Captain Underpants", 80.0, 40, "Snapping fingers");
+    Hero hero15("Invincible", 90.0, 50, "Trains");
+    Hero hero16("Joker", 70.0, 30, "The IRS");
+    Hero hero17("Spider-man", 75.0, 40, "The Writer");
 
+    
     // Create a team and add heroes to it
     Team justiceLeague("Justice League");
     justiceLeague.addHero(hero1);
@@ -46,13 +52,14 @@ int main() {
     animeHeroes.addHero(hero13);
 
     // Create a captain for the team
-    Captain captain("Superman", &justiceLeague);
+    Captain JLcaptain("Superman", &justiceLeague);
     Captain animeCaptain("Luffy", &animeHeroes);
 
     
     // Display information about the captain and the team
-    captain.displayCaptainInfo();
+    JLcaptain.displayCaptainInfo();
     justiceLeague.displayTeamInfo();
+
     //justiceLeague.displayCaptainInfo();
     animeCaptain.displayCaptainInfo();
     animeHeroes.displayTeamInfo();
