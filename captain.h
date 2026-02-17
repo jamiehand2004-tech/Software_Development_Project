@@ -22,6 +22,10 @@ public:
     Team* getTeam(){return team;}
     void displayCaptainInfo();
     
+    bool isMultipleCaptains();
+    void setCaptainCount(int count) {captainCount = count;}
+    int getCaptainCount() {return captainCount;}
+
 };
 
 Captain::Captain() {

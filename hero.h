@@ -1,3 +1,8 @@
+/*  Header file for the Hero class,
+    which defines the properties of hero characters in our Hero-Agency-Management project.
+*/
+
+
 #pragma once
 #include <iostream>
 #include <string>
@@ -22,23 +27,25 @@ Hero(string n);
 Hero(string n, float h);
 Hero(string n, float h, int a);
 Hero(string n, float h, int a, string w);
+Hero(string n, float h, int a, string w, bool s);
+Hero(string n, float h, int a, string w, bool s, bool stat);
 
 void setHeroName(string n) { heroName = n;}
-string getHeroName(){return heroName;}
+string getHeroName() {return heroName;}
 
 void setHealth(float h) {health = h;}
-float getHealth(){return health;}
+float getHealth() {return health;}
 
 void setAttack(int a) {attack = a;}
-int getAttack(){return attack;};
+int getAttack() {return attack;};
 
 void setWeakness(string w) {weakness = w;}
-string getWeakness(){return weakness;}
+string getWeakness() {return weakness;}
 
 void setCaptainStatus(bool s) {captainStatus = s;}
 bool getCaptainStatus() {return captainStatus;}
 
-void setAlive(bool status) {isAlive = status;}
+void setAlive(bool stat) {isAlive = stat;}
 bool getAlive() {return isAlive;}
 
 void displayHeroInfo();
@@ -49,5 +56,7 @@ Hero::Hero(){
     health = 100.0;
     attack = 10;
     weakness = "None";
+    captainStatus = false;
+    isAlive = true;
     heroCount++;
 };
