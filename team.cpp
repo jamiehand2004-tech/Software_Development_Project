@@ -7,6 +7,13 @@
 #include "team.h"
 #include "hero.h"
 #include "captain.h"
+using std::string;
+using std::cout;
+using std::endl;
+using std::vector;
+
+
+
 
 void Team::addHero(Hero h) {
     if (heroCount < MAX_HEROES) {

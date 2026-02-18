@@ -10,7 +10,6 @@
 using  std::string;
 using std::vector;
 
-
 class Hero {
     
 private:

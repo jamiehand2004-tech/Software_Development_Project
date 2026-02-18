@@ -3,7 +3,6 @@
     which demonstrates the creation and management of heroes, teams, and captains.
 */
 
-
 #include <iostream>
 #include <string>
 #include "hero.h"
