@@ -25,8 +25,7 @@ Hero teamHeroes[MAX_HEROES];
 
 public:
 //Getters 
-string getTeamName() {return teamName;} 
-string getTeamName() {return teamName;} 
+string getTeamName() {return teamName;}
 Hero* getHeroes() {return heroes;} 
 int getHeroCount() {return heroCount;} 
 
