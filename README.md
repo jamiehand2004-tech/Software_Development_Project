@@ -32,3 +32,7 @@ These are ideas we have at the moment, can be expanded/scaled back as needed.
 Thank you for your time. :]
 
 
+
+## UML Diagram
+
+![UML Diagram](https://github.com/user-attachments/assets/e7299f75-2db7-4ca9-bb6f-10ba6c01ae43)
