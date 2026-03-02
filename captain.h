@@ -30,11 +30,13 @@ public:
     bool isMultipleCaptains();
     void displayCaptainInfo();
     void assignCaptain(Hero hero, Team* team);
+
 //Constructors
     Captain::Captain();
     Captain::Captain(string name, int count);
     Captain::Captain(string name, Team* t, int count);
     Captain::Captain(string name, Team* t, int captainCount);
+    
 };
 
 #endif

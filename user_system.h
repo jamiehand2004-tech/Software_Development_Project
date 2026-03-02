@@ -6,7 +6,6 @@
 #include <vector>
 #include "admin.h"
 
-
 using std::string;
 using std::vector;
 using std::cout;
@@ -15,7 +14,7 @@ using std::ofstream;
 using std::ios;
 using std::cerr;
 using std::cin;
-using std::numeric_limits;
+using std::pair;
 
 
 struct User {
@@ -28,13 +27,18 @@ class UserSystem {
 
 private:
 
-    vector<string, User> users;
+    vector<pair<string, User>> users;
     string currentUser;
+    
 
 public:
+    UserSystem();
+    void loadUsers();
+    void saveUsers();
 
-    bool registerUser(string username, string password, string role);
-    bool loginUser(string username, string password);
+    bool registerUser(const string & username, const string password, const string role);
+    
+    bool loginUser(const string & username, const string & password);
     void logoutUser();
     bool isAdmin();
 

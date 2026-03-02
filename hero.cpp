@@ -16,3 +16,5 @@ Hero::Hero(string n, int h, int a, string w, bool s, bool stat) {
     isAlive = stat;
     heroCount++;
 };
+
+

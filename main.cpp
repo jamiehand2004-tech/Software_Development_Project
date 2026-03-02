@@ -16,7 +16,7 @@ using std::vector;
 
 int main() {
 
-    
+
     // Create heroes
     Hero hero1("Superman", 100, 50, "Kryptonite");
     Hero hero2("Batman", 80, 30, "Himself");
@@ -35,6 +35,13 @@ int main() {
     Hero hero15("Invincible", 90, 50, "Trains");
     Hero hero16("Joker", 70, 30, "The IRS");
     Hero hero17("Spider-man", 75, 40, "The Writer");
+    Hero hero18("Uriel", 100, 100, "None");
+    Hero hero19("Kratos", 150, 150, "Rage");
+    Hero hero20("Icarus", 60, 40, "The Sun");
+    
+
+
+
 
     
     // Create a team and add heroes to it

@@ -32,9 +32,9 @@ void Admin::createTeam(string teamName) {
     cout << "Team created: " << newTeam.getTeamName() << endl;
 }
 
-void Admin::assignCaptain(Hero heroes, Team team) {
-    Captain newCaptain(heroes.getHeroName(), &team);
-    cout << "Captain " << newCaptain.getCaptainName() << " assigned to team " << team.getTeamName() << endl;
+void Admin::assignCaptain(Hero hero, Team team) {
+    //Captain newCaptain(hero.getHeroName(), &team);
+    //cout << "Captain " << newCaptain.getCaptainName() << " assigned to team " << team.getTeamName() << endl;
 }
 
 void Admin::displayTeamInfo(Team team) {
