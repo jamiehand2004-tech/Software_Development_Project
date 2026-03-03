@@ -11,7 +11,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-Team::Team(string tn,const static int maxH, Hero* h, int cnt) { 
+Team::Team(string tn, const int maxH, Hero* h, int cnt) { 
 
     teamName = tn;  
     heroes = h;  

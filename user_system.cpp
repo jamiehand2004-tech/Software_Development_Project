@@ -15,6 +15,8 @@ using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::find_if;
+
 
 UserSystem::UserSystem() {
     loadUsers();
@@ -49,16 +51,20 @@ void UserSystem::saveUsers() {
 }
 
 bool UserSystem::registerUser(const string & username, const string password, const string role) {
-    if (users.count(username)) {
+    auto it = find_if(users.begin(), users.end(),
+        [&username](const auto& pair) { return pair.first == username; });
+    if (it != users.end()) {
         return false; // Username already exists
     }
-    users[username] = {username, password, role};
+    users.push_back({username, {username, password, role}});
     saveUsers(); // Save the updated user list
     return true;
 }
 
 bool UserSystem::loginUser(const string & username, const string & password) {
-    if (users.count(username) && users[username].password == password) {
+    auto it = find_if(users.begin(), users.end(),
+        [&username](const auto& pair) { return pair.first == username; });
+    if (it != users.end() && it->second.password == password) {
         currentUser = username;
         return true; // Login successful
     }
@@ -67,6 +73,7 @@ bool UserSystem::loginUser(const string & username, const string & password) {
 
 void UserSystem::logoutUser() {
     currentUser.clear();
+    
 
 }
 

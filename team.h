@@ -43,7 +43,7 @@ void displayCaptainInfo();
 Team();
 Team(string tn);
 Team(string tn, Hero* h, int cnt);
-Team(string tn, const static int maxH, Hero* h, int cnt);
+Team(string tn, const int maxH, Hero* h, int cnt);
 
 };
 
