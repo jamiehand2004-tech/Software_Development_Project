@@ -2,18 +2,21 @@
 #include <iostream>
 #include "team.h"
 
+// Default constructor
 Captain::Captain() {
     captainName = "Unknown";
     team = nullptr;
     captainCount = 0;
 }
 
+// Parameterized constructor
 Captain::Captain(const std::string &name, Team* t, int count) {
     captainName = name;
     team = t;
     captainCount = count;
 }
 
+// General functions
 bool Captain::isMultipleCaptains() {
     if (captainCount > 1) {
         std::cout << "Warning: More than one captain created. Captain count: " << captainCount << std::endl;
@@ -22,6 +25,7 @@ bool Captain::isMultipleCaptains() {
     return false;
 }
 
+// Assign a hero as the captain of a team
 void Captain::displayCaptainInfo() {
     if (!team) {
         std::cout << "No team assigned to this captain." << std::endl;

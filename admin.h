@@ -1,9 +1,13 @@
 #ifndef ADMIN_H
 #define ADMIN_H
+
 #include <iostream>
+#include <string>
+
 #include "hero.h"
 #include "team.h"
 #include "captain.h"
+
 using std::string;
 using std::cout;
 using std::endl;
@@ -29,7 +33,6 @@ public:
     void setAdminCount(int count) {adminCount = count;}
 
 //General
-    
     void createHero(string name, int health, int attack, string weakness);
     void createTeam(string teamName);
     void assignCaptain(Hero hero, Team team);

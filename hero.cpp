@@ -7,27 +7,32 @@
 #include "captain.h"
 #include "team.h"
 
+// Constructors
 Hero::Hero()
 {
 
     
 }
 
+// Parameterized constructors
 Hero::Hero(string n)
 {
 
 }
 
+// Parameterized constructors
 Hero::Hero(string n, int h)
 {
 
 }
 
+// Parameterized constructors
 Hero::Hero(string n, int h, int a)
 {
     
 }
 
+// Parameterized constructors
 Hero::Hero(string n, int h, int a, string w)
 {
     heroName = n;
@@ -41,6 +46,13 @@ Hero::Hero(string n, int h, int a, string w)
 
 Hero::Hero(string n, int h, int a, string w, bool s)
 {
+    heroName = n;
+    health = h;
+    attack = a;
+    weakness = w;
+    captainStatus = s;
+    isAlive = true;
+    heroCount++;
 }
 
 Hero::Hero(string n, int h, int a, string w, bool s, bool stat)

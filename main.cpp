@@ -21,7 +21,7 @@ using std::ofstream;
 using std::ifstream;
 using std::ios;
 
-
+// Main function to demonstrate the functionality of the Hero-Agency-Management system
 int main() {
     cout << "PROGRAM START" << endl;
 
@@ -64,6 +64,7 @@ int main() {
     justiceLeague.addHero(hero5);
     justiceLeague.addHero(hero6);
 
+    // Create another team and add heroes to it
     Team animeHeroes("Anime Heroes");
     // Make Luffy the captain of animeHeroes
     hero10.setCaptainStatus(true);

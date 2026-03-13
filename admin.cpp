@@ -2,6 +2,7 @@
 #include "hero.h"
 #include "team.h"
 #include "captain.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,16 +28,19 @@ void Admin::createHero(string name, int health, int attack, string weakness) {
     cout << "Hero created: " << newHero.getHeroName() << endl;
 }
 
+//create a team with the given name
 void Admin::createTeam(string teamName) {
     Team newTeam(teamName);
     cout << "Team created: " << newTeam.getTeamName() << endl;
 }
 
+//assign a hero as the captain of a team
 void Admin::assignCaptain(Hero hero, Team team) {
     //Captain newCaptain(hero.getHeroName(), &team);
     //cout << "Captain " << newCaptain.getCaptainName() << " assigned to team " << team.getTeamName() << endl;
 }
 
+//display information about a team, including its heroes and captain
 void Admin::displayTeamInfo(Team team) {
     cout << "Team Name: " << team.getTeamName() << endl;
     cout << "Heroes in the team:" << endl;

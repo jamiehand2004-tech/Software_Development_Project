@@ -16,37 +16,39 @@
 class Team {
 
 private:
-string teamName;
-Hero* heroes = nullptr;
-int heroCount = 0;
-const static int MAX_HEROES = 10;
-int teamCount = 0;
-Hero teamHeroes[MAX_HEROES];
+
+    string teamName;
+    Hero* heroes = nullptr;
+    int heroCount = 0;
+    const static int MAX_HEROES = 10;
+    int teamCount = 0;
+    Hero teamHeroes[MAX_HEROES];
 
 public:
+
 //Getters 
-string getTeamName() {return teamName;}
-Hero* getHeroes() {return heroes;} 
-int getHeroCount() {return heroCount;} 
+    string getTeamName() {return teamName;}
+    Hero* getHeroes() {return heroes;} 
+    int getHeroCount() {return heroCount;} 
 
 //Setters
-void setTeamName(string tn) {teamName = tn;} 
-void setHeroes(Hero* h) {heroes = h;} 
-void setHeroCount(int cnt) {heroCount = cnt;}
+    void setTeamName(string tn) {teamName = tn;} 
+    void setHeroes(Hero* h) {heroes = h;} 
+    void setHeroCount(int cnt) {heroCount = cnt;}
 
 //General
-void addHero(Hero h); 
-void displayTeamInfo(); 
-void displayCaptainInfo(); 
+    void addHero(Hero h); 
+    void displayTeamInfo(); 
+    void displayCaptainInfo(); 
     
-    // Persistence
+// Persistence
     void save(std::ostream &os) const;
     bool load(std::istream &is);
 
 // Constructors
-Team();
-Team(string tn);
-Team(string tn, Hero* h, int cnt);
+    Team();
+    Team(string tn);
+    Team(string tn, Hero* h, int cnt);
 
 };
 

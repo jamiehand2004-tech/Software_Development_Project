@@ -11,10 +11,14 @@ using std::vector;
 
 class TeamSystem {
 private: 
+// Container for teams
     vector<Squad> teams;
 
 public:
+// Constructors
+    TeamSystem() = default;
 
+// Load teams from a file
     void loadFromFile(const string & filename);
     void saveToFile(const string & filename);
     void addTeam(const Squad & teamName);

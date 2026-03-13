@@ -16,11 +16,12 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-
+// UserSystem implementation
 UserSystem::UserSystem() {
     loadUsers();
 }
 
+// Load users from a file
 void UserSystem::loadUsers() {
     ifstream file("users.txt");
     if (!file.is_open()) {
@@ -39,6 +40,7 @@ void UserSystem::loadUsers() {
     // Load users from a file
 }
 
+// Save users to a file
 void UserSystem::saveUsers() {
     ofstream file("users.txt");
     for (auto & pair : users){
@@ -50,6 +52,7 @@ void UserSystem::saveUsers() {
     // Save users to a file (not implemented here)
 }
 
+// Register a new user
 bool UserSystem::registerUser(const string & username, const string password, const string role) {
     if (users.count(username)) {
         return false; // Username already exists
@@ -59,6 +62,7 @@ bool UserSystem::registerUser(const string & username, const string password, co
     return true;
 }
 
+// Login a user
 bool UserSystem::loginUser(const string & username, const string & password) {
     if (users.count(username) && users[username].password == password) {
         currentUser = username;
@@ -67,11 +71,13 @@ bool UserSystem::loginUser(const string & username, const string & password) {
     return false; // Login failed
 }
 
+// Logout the current user
 void UserSystem::logoutUser() {
     currentUser.clear();
 
 }
 
+// Check if the current user is an admin
 bool UserSystem::isAdmin() {
     for (const auto& user : users) {
         if (user.first == currentUser && user.second.role == "admin") {

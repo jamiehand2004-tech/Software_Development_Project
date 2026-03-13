@@ -12,6 +12,7 @@ using std::endl;
 using std::getline;
 using std::cerr;
 
+// Function to load squads from a file
 vector<Squad> loadSquad(const string & filename) {
     vector<Squad> squads;
     ifstream file(filename);

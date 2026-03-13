@@ -6,11 +6,13 @@
 #include "team.h"
 #include "hero.h"
 #include "captain.h"
+
 using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
 
+// Constructors
 Team::Team(string tn)
 {
     teamName = tn;
@@ -18,6 +20,7 @@ Team::Team(string tn)
     heroCount = 0;
 }
 
+// Default constructor
 Team::Team()
 {
     teamName = "";
@@ -25,6 +28,7 @@ Team::Team()
     heroCount = 0;
 }
 
+// Parameterized constructor
 Team::Team(string tn, Hero *h, int cnt)
 
 {
@@ -33,6 +37,8 @@ Team::Team(string tn, Hero *h, int cnt)
     heroes = h;  
     heroCount = cnt;
 };
+
+// Add a hero to the team
 void Team::addHero(Hero h) {
     if (heroCount < MAX_HEROES) {
         teamHeroes[heroCount] = h; // Add hero to the team array
@@ -42,6 +48,7 @@ void Team::addHero(Hero h) {
     }
 };
 
+// Display team information
 void Team::displayTeamInfo() {
     cout << "Team Name: " << teamName << endl;
     cout << "Number of Heroes: " << heroCount << endl;
@@ -51,6 +58,7 @@ void Team::displayTeamInfo() {
     }
 };
 
+// Display captain information
 void Team::displayCaptainInfo() {
     cout << "Captain of the Team: " << endl;
     for (int i = 0; i < heroCount; i++) {
@@ -62,6 +70,7 @@ void Team::displayCaptainInfo() {
     cout << "No captain assigned to this team." << endl; // If no captain is found
 };
 
+// Save team information to a stream
 void Team::save(std::ostream &os) const {
     os << teamName << std::endl;
     os << heroCount << std::endl;
@@ -73,6 +82,7 @@ void Team::save(std::ostream &os) const {
     os << "----" << std::endl;
 }
 
+// Load team information from a stream
 bool Team::load(std::istream &is) {
     if (!std::getline(is, teamName)) return false;
     std::string line;

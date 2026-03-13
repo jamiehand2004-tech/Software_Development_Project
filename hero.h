@@ -11,6 +11,7 @@
 using  std::string;
 using std::vector;
 
+// Hero class definition
 class Hero {
     
 private:

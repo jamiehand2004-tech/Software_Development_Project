@@ -13,11 +13,13 @@ using std::cin;
 using std::endl;
 using std::ios;
 
+// Load teams from a file
 void TeamSystem::loadFromFile(const string & filename) {
     
     teams = loadSquad(filename);
 }
 
+// Save teams to a file
 void TeamSystem::saveToFile(const string & filename) {
     
     std::ofstream file(filename);
@@ -36,10 +38,12 @@ void TeamSystem::saveToFile(const string & filename) {
     }
 }
 
+// Add a team to the system
 void TeamSystem::addTeam(const Squad & team) {
     teams.push_back(team);
 }
 
+// Interactive function to add a team by prompting the user for input
 void TeamSystem::addingTeam(const string & filename) {
     ofstream file(filename, ios::app);
     if (!file.is_open()) {
