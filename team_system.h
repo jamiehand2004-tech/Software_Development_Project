@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "team_reader.h"
 
 using std::string;
@@ -11,10 +12,12 @@ using std::vector;
 
 class TeamSystem {
 private: 
+
 // Container for teams
     vector<Squad> teams;
 
 public:
+
 // Constructors
     TeamSystem() = default;
 

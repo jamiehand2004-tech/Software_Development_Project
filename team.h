@@ -9,8 +9,10 @@
 
 #ifndef TEAM_H
 #define TEAM_H
+
 #include <iostream>
 #include <string>
+
 #include "hero.h"
 
 class Team {

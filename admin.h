@@ -37,7 +37,6 @@ public:
     void createTeam(string teamName);
     void assignCaptain(Hero hero, Team team);
     void displayTeamInfo(Team team);
-
 };
 
 #endif

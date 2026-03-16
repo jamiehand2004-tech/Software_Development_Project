@@ -1,4 +1,5 @@
 #include "team_system.h"
+
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -15,7 +16,6 @@ using std::ios;
 
 // Load teams from a file
 void TeamSystem::loadFromFile(const string & filename) {
-    
     teams = loadSquad(filename);
 }
 
@@ -29,7 +29,6 @@ void TeamSystem::saveToFile(const string & filename) {
     }
 
     for (const auto& team : teams) {
-       
         file << team.text << std::endl;
         file << team.options.size() << std::endl; 
         for (const auto& option : team.options) 

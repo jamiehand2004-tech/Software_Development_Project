@@ -53,7 +53,6 @@ public:
 // Get current user
     string getCurrentUser() 
         { return currentUser; }
-
 };
 
 #endif

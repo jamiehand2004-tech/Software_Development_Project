@@ -3,6 +3,7 @@
 #include "hero.h"
 #include "team.h"
 #include "captain.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -74,7 +75,6 @@ bool UserSystem::loginUser(const string & username, const string & password) {
 // Logout the current user
 void UserSystem::logoutUser() {
     currentUser.clear();
-
 }
 
 // Check if the current user is an admin
