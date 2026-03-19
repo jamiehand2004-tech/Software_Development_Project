@@ -17,6 +17,7 @@ using std::ios;
 using std::cerr;
 
 class Admin {
+    
 private:
 
     string adminName;

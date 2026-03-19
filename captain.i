@@ -9983,9 +9983,6 @@ typedef struct _CrtMemState
     #line 60 "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\include\\crtdefs.h"
 #line 61 "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\include\\crtdefs.h"
 
-
-    
-
 #line 66 "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\include\\crtdefs.h"
         
 

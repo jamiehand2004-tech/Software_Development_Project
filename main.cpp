@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+
 #include "hero.h"
 #include "team.h"
 #include "captain.h"
@@ -49,10 +50,6 @@ int main() {
     Hero hero20("Icarus", 60, 40, "The Sun");
     
 
-
-
-
-    
     // Create a team and add heroes to it
     Team justiceLeague("Justice League");
     // assign captain status before adding so the team's copy reflects it

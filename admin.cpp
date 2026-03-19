@@ -54,17 +54,3 @@ void Admin::displayTeamInfo(Team team) {
              << ")" << endl;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

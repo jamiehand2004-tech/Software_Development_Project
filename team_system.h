@@ -23,7 +23,6 @@ public:
     void saveToFile(const string & filename);
     void addTeam(const Squad & teamName);
     void addingTeam(const string & teamName);
-    
 };
 
 #endif

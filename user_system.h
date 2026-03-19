@@ -19,16 +19,14 @@ using std::map;
 
 // User structure to hold user information
 struct User {
-
     string username;
     string password;
     string role; // e.g., "admin", "user"
-
 };
 
 // UserSystem class to manage user registration, login, and role-based access
 
-class UserSystem {
+class UserSystem : public Admin {
 
 private:
 
@@ -44,13 +42,13 @@ public:
     void loadUsers();
     void saveUsers();
 
-// User management functions
+// General functions
     bool registerUser(const string & username, const string password, const string role);
     bool loginUser(const string & username, const string & password);
     void logoutUser();
     bool isAdmin();
 
-// Get current user
+// Getters
     string getCurrentUser() 
         { return currentUser; }
 

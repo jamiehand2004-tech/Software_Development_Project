@@ -74,7 +74,6 @@ bool UserSystem::loginUser(const string & username, const string & password) {
 // Logout the current user
 void UserSystem::logoutUser() {
     currentUser.clear();
-
 }
 
 // Check if the current user is an admin

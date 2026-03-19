@@ -46,8 +46,11 @@ ideas:
     possibly use battle functionality 
 
 
-
-
+Updated List to include some of the edits i have made
+- Created a branch for trial running features
+- implemented the save states
+- creation of heroes (not only by admins at the moment)
+- outputs are stored in text files that are read by the system
 
 
 
