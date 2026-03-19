@@ -26,7 +26,6 @@ using std::ios;
 int main() {
     cout << "PROGRAM START" << endl;
 
-
     // Create heroes
     Hero hero1("Superman", 100, 50, "Kryptonite");
     Hero hero2("Batman", 80, 30, "Himself");
@@ -49,7 +48,10 @@ int main() {
     Hero hero19("Kratos", 150, 150, "Rage");
     Hero hero20("Icarus", 60, 40, "The Sun");
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3003f7b66828f73e4c7d5103e1512b5900c31af6
     // Create a team and add heroes to it
     Team justiceLeague("Justice League");
     // assign captain status before adding so the team's copy reflects it

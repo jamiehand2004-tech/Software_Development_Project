@@ -32,7 +32,6 @@ Team::Team()
 Team::Team(string tn, Hero *h, int cnt)
 
 {
-
     teamName = tn;  
     heroes = h;  
     heroCount = cnt;
@@ -106,6 +105,7 @@ bool Team::load(std::istream &is) {
         Hero h(name, health, attack, weakness, cap, alive);
         teamHeroes[i] = h;
     }
+    
     // read separator
     std::string sep;
     std::getline(is, sep);

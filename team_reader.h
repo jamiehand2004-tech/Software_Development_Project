@@ -1,5 +1,6 @@
 #ifndef TEAM_READER_H
 #define TEAM_READER_H
+
 #include <iostream>
 #include <string>
 #include <vector>

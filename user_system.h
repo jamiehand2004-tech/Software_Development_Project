@@ -51,7 +51,6 @@ public:
 // Getters
     string getCurrentUser() 
         { return currentUser; }
-
 };
 
 #endif
