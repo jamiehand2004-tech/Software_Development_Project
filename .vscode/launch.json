@@ -1,17 +1,16 @@
 {
+    "version": "2.0.0",
     "configurations": [
         {
-            "name": "C/C++: cl.exe build and debug active file",
-            "type": "cppvsdbg",
+            "name": "Debug C++ Project",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\OBJ+PDB_files\\Software_Development_Project.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "C/C++: cl.exe build active file"
+            "program": "${workspaceFolder}\\Software_Development_Project\\CPP_Files\\app.exe",
+            "cwd": "${workspaceFolder}\\Software_Development_Project\\CPP_Files",
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\gdb.exe",
+            "preLaunchTask": "build-all"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

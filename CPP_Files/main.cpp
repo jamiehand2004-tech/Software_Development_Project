@@ -12,6 +12,7 @@
 #include "../Header_Files/team.h"
 #include "../Header_Files/captain.h"
 #include "../Header_Files/user_system.h"
+#include "../Header_Files/menu_helpers.h"
 
 using std::string;
 using std::cout;
@@ -106,7 +107,9 @@ int main() {
 
     while (running) {
 
-        cout << "\nMenu:\n (1) List teams\n (2) Add hero to team\n (3) Save state\n (4) Load state\n (5) Exit\n (6) Create Team-> ";
+        // NEW CODE: menu print moved into a helper.
+        showMainMenu();
+
         int choice = 0;
         if (!(cin >> choice)) 
         { 
@@ -116,26 +119,14 @@ int main() {
         cin.ignore(10000, '\n');
 
         if (choice == 1) {
-            for (size_t i = 1; i < teams.size(); ++i) {
-                cout << "-- Team [" << i << "] --" << endl;
-                teams[i].displayTeamInfo();
-                teams[i].displayCaptainInfo();
-            }
+            // NEW CODE: fixed listing so it includes the first team.
+            listTeamsFromMenu(teams);
         } 
 
         else if (choice == 2) 
         {
-            cout << "Enter team index: "; size_t idx; if (!(cin >> idx)) { cin.clear(); cin.ignore(10000,'\n'); continue; }
-            cin.ignore(10000,'\n'); if (idx >= teams.size()) { cout << "Invalid index\n"; continue; }
-            string name; int health, attack; string weakness; char isCap='n';
-            cout << "Hero name: "; getline(cin, name);
-            cout << "Health: "; cin >> health; cin.ignore(10000,'\n');
-            cout << "Attack: "; cin >> attack; cin.ignore(10000,'\n');
-            cout << "Weakness: "; getline(cin, weakness);
-            cout << "Is captain? (y/n): "; cin >> isCap; cin.ignore(10000,'\n');
-            Hero h(name, health, attack, weakness, (isCap=='y' || isCap=='Y'), true);
-            teams[idx].addHero(h);
-            cout << "Hero added.\n";
+            // NEW CODE: fixed team selection so the number shown to the user matches the team chosen.
+            addHeroToTeamFromMenu(teams);
         } 
 
         else if (choice == 3) 
@@ -169,11 +160,23 @@ int main() {
             running = false;
         }
         
- //       else if (choice == 6)
-  //      {
-  //          cin << teamName << endl;
-  //          cin <<     
-   //     }
+        else if (choice == 6)
+        {
+            // NEW CODE: this implements the missing create team option.
+            createTeamFromMenu(teams);
+        }
+
+        else if (choice == 7)
+        {
+            // NEW CODE: delete a full team from the teams vector.
+            deleteTeamFromMenu(teams);
+        }
+
+        else if (choice == 8)
+        {
+            // NEW CODE: delete a hero from a selected team.
+            deleteHeroFromTeamFromMenu(teams);
+        }
 
     }
     return 0;

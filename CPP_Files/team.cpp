@@ -61,7 +61,7 @@ void Team::addHero(Hero h) {
 };
 
 // Display team information
-void Team::displayTeamInfo() {
+void Team::displayTeamInfo() const {
     cout << "Team Name: " << teamName << endl;
     cout << "Number of Heroes: " << heroCount << endl;
     cout << "Heroes in the Team:" << endl;
@@ -71,7 +71,7 @@ void Team::displayTeamInfo() {
 };
 
 // Display captain information
-void Team::displayCaptainInfo() {
+void Team::displayCaptainInfo() const {
     cout << "Captain of the Team: " << endl;
     const Hero *captain = findCaptain();
     if (captain != nullptr) {
@@ -132,6 +132,21 @@ const Hero* Team::findCaptain() const {
 
     return &(*it);
 }
+// remove a hero from the team by matching the hero name.
+bool Team::removeHeroByName(const string &heroName) {
+    auto it = std::find_if(teamHeroes.begin(), teamHeroes.end(),
+        [&heroName](const Hero &hero) {
+            return hero.getHeroName() == heroName;
+        });
+
+    if (it == teamHeroes.end()) {
+        return false;
+    }
+
+    teamHeroes.erase(it);
+    syncHeroCount();
+    return true;
+}
 
 // Save team information to a stream
 void Team::save(std::ostream &os) const {
@@ -181,4 +196,6 @@ bool Team::load(std::istream &is) {
     std::string sep;
     if (!std::getline(is, sep)) return false;
     return sep == "----";
+
+    
 }
