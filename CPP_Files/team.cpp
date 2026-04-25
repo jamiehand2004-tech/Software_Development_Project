@@ -14,6 +14,10 @@ using std::string;
 using std::cout;
 using std::endl;
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
+
 // Constructors
 Team::Team(string tn)
 {
@@ -56,7 +60,7 @@ void Team::addHero(Hero h) {
         teamHeroes.push_back(h);
         syncHeroCount();
     } else {
-        cout << "Cannot add more heroes to the team. Maximum limit reached." << endl;
+        cout <<RED<< "Cannot add more heroes to the team. Maximum limit reached." << endl << RESET;
     }
 };
 
@@ -79,7 +83,7 @@ void Team::displayCaptainInfo() const {
         cout << "- " << captain->getHeroName() << endl;
         return;
     }
-    cout << "No captain assigned to this team." << endl;
+    cout <<RED<< "No captain assigned to this team." << endl << RESET;
 }
 
 // Display full team information
@@ -210,22 +214,6 @@ bool Team::load(std::istream &is) {
     std::string sep;
     if (!std::getline(is, sep)) return false;
     return sep == "----";
-
-    //void Team::displayFullTeamInfo() const {
-    //cout << "Team Name: " << teamName << endl;
-    //cout << "Number of Heroes: " << heroCount << endl;
-    //cout << "------------------------------" << endl;
-    //if (teamHeroes.empty()) {
-    //   // cout << "No heroes in the team." << endl;
-    //   // return;
-    //}
-    //cout << "Heroes in the Team:" << endl;
-    //for (const Hero &hero : teamHeroes) {
-        //cout << "------------------------------" << endl;
-        //cout << "Name: " << hero.getHeroName() << endl;
-        //cout << "Health: " << hero.getHealth() << endl;
-        //cout << "Attack: " << hero.getAttack() << endl;
-        //cout << "Weakness: " << hero.getWeakness() << endl;
-        //cout << "Captain Status: " << (hero.getCaptainStatus() ? "Yes" : "No") << endl;
+    
     }
     

@@ -22,7 +22,7 @@ private:
     int heroCount = 0;
     const static int MAX_HEROES = 10;
     int teamCount = 0;
-
+//keeps herocount matched to the size of the vector since it may be modified by add/remove hero functions.
     void syncHeroCount() { heroCount = static_cast<int>(teamHeroes.size()); }
 
 public:
@@ -30,6 +30,7 @@ public:
     // Getters
     string getTeamName() const { return teamName; }
     Hero* getHeroes() { return teamHeroes.empty() ? nullptr : teamHeroes.data(); }
+    //const so team data can be displayed
     const Hero* getHeroes() const { return teamHeroes.empty() ? nullptr : teamHeroes.data(); }
     int getHeroCount() const { return heroCount; }
 
@@ -41,7 +42,7 @@ public:
     // General
     void addHero(Hero h);
 
-    // NEW CODE: marked const so teams can be displayed through a const reference.
+    //marked const so teams can be displayed through a const reference.
     void displayTeamInfo() const;
     void displayFullTeamInfo() const;
     
@@ -54,7 +55,7 @@ public:
     Hero* findCaptain();
     const Hero* findCaptain() const;
 
-    // NEW CODE: removes a hero from the team by name.
+    //removes a hero from the team by name.
     bool removeHeroByName(const string &heroName);
 
     // Persistence

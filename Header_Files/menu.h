@@ -14,8 +14,6 @@ void showMainMenu();
 void listTeamsFromMenu(const vector<Team>& teams);
 bool addHeroToTeamFromMenu(vector<Team>& teams);
 bool createTeamFromMenu(vector<Team>& teams);
-
-// NEW CODE: extra menu helpers for deleting teams and deleting heroes from teams.
 bool deleteTeamFromMenu(vector<Team>& teams);
 bool deleteHeroFromTeamFromMenu(vector<Team>& teams);
 

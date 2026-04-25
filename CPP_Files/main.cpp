@@ -24,9 +24,14 @@ using std::ofstream;
 using std::ifstream;
 using std::ios;
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
+const string CYAN = "\033[36m";
+
 // Main function to demonstrate the functionality of the Hero-Agency-Management system
 int main() {
-    cout << "PROGRAM START" << endl;
+    cout << GREEN << "PROGRAM START" << endl << RESET;
 
     // Create heroes
     Hero hero1("Superman", 100, 50, "Kryptonite");
@@ -107,11 +112,11 @@ int main() {
             getline(cin, password);
 
             if (userSys.loginUser(username, password)) {
-                cout << "Logged in as user: " << userSys.getCurrentUser() << endl;
+                cout << CYAN << "Logged in as user: " << userSys.getCurrentUser() << endl << RESET;
                 loggedIn = true;
             }
             else {
-                cout << "Login failed. Try again." << endl;
+                cout << RED << "Login failed. Try again." << endl << RESET;
             }
         }
 
@@ -125,13 +130,13 @@ int main() {
             getline(cin, password);
 
             if (username.empty() || password.empty()) {
-                cout << "Username and password cannot be empty." << endl;
+                cout << RED << "Username and password cannot be empty." << endl << RESET;
             }
             else if (userSys.registerUser(username, password, "user")) {
-                cout << "User registered successfully. You can now log in." << endl;
+                cout << GREEN << "User registered successfully. You can now log in." << endl << RESET;
             }
             else {
-                cout << "That username already exists." << endl;
+                cout << RED << "That username already exists." << endl << RESET;
             }
         }
 
@@ -146,7 +151,7 @@ int main() {
     while (running) {
 
         // NEW CODE: show the currently logged-in user.
-        cout << "\nCurrent User: " << userSys.getCurrentUser() << endl;
+        cout <<CYAN<< "\nCurrent User: " << userSys.getCurrentUser()<< RESET;
 
         showMainMenu();
 
@@ -236,13 +241,13 @@ int main() {
             }
 
             if (duplicateTeam) {
-                cout << "A team with that name already exists." << endl;
+                cout << RED << "A team with that name already exists." << endl << RESET;
                 continue;
             }
 
             Team newTeam(teamName);
             teams.push_back(newTeam);
-            cout << "Team created successfully." << endl;
+            cout << GREEN << "Team created successfully." << endl << RESET;
         }
 
         else if (choice == 7)
