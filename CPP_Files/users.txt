@@ -1,2 +1,3 @@
 admin adminpass admin
 alice alicepass user
+charlie 123 user

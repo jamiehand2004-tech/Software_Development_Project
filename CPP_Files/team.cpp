@@ -64,6 +64,7 @@ void Team::addHero(Hero h) {
 void Team::displayTeamInfo() const {
     cout << "Team Name: " << teamName << endl;
     cout << "Number of Heroes: " << heroCount << endl;
+    cout << "------------------------------" << endl;
     cout << "Heroes in the Team:" << endl;
     for (const Hero &hero : teamHeroes) {
         cout << "- " << hero.getHeroName() << endl;
@@ -79,7 +80,20 @@ void Team::displayCaptainInfo() const {
         return;
     }
     cout << "No captain assigned to this team." << endl;
-};
+}
+
+// Display full team information
+void Team::displayFullTeamInfo() const {
+    cout << "Team Name: " << teamName << endl;
+    cout << "Number of Heroes: " << heroCount << endl;
+    cout << "------------------------------" << endl;
+    cout << "Heroes in the Team:" << endl;
+    cout << "Hero Name | Health | Attack | Weakness | Captain Status |" << endl;
+    for (const Hero &hero : teamHeroes) {
+        cout << "- " << hero.getHeroName() <<"|" << hero.getHealth() << "|" << hero.getAttack() << "|" << hero.getWeakness() << "|" << (hero.getCaptainStatus() ? "1" : "0") << "|" << endl;
+    }
+}
+
 
 Hero* Team::findHero(const string &heroName) {
     auto it = std::find_if(teamHeroes.begin(), teamHeroes.end(),
@@ -197,5 +211,21 @@ bool Team::load(std::istream &is) {
     if (!std::getline(is, sep)) return false;
     return sep == "----";
 
+    //void Team::displayFullTeamInfo() const {
+    //cout << "Team Name: " << teamName << endl;
+    //cout << "Number of Heroes: " << heroCount << endl;
+    //cout << "------------------------------" << endl;
+    //if (teamHeroes.empty()) {
+    //   // cout << "No heroes in the team." << endl;
+    //   // return;
+    //}
+    //cout << "Heroes in the Team:" << endl;
+    //for (const Hero &hero : teamHeroes) {
+        //cout << "------------------------------" << endl;
+        //cout << "Name: " << hero.getHeroName() << endl;
+        //cout << "Health: " << hero.getHealth() << endl;
+        //cout << "Attack: " << hero.getAttack() << endl;
+        //cout << "Weakness: " << hero.getWeakness() << endl;
+        //cout << "Captain Status: " << (hero.getCaptainStatus() ? "Yes" : "No") << endl;
+    }
     
-}

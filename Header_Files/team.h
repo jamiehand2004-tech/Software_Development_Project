@@ -43,6 +43,8 @@ public:
 
     // NEW CODE: marked const so teams can be displayed through a const reference.
     void displayTeamInfo() const;
+    void displayFullTeamInfo() const;
+    
 
     // NEW CODE: marked const so teams can be displayed through a const reference.
     void displayCaptainInfo() const;

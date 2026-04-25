@@ -1,4 +1,4 @@
-#include "../Header_Files/menu_helpers.h"
+#include "../Header_Files/menu.h"
 
 #include <iostream>
 #include <limits>
@@ -22,6 +22,7 @@ void showMainMenu() {
          << " (6) Create Team\n"
          << " (7) Delete Team\n"
          << " (8) Delete Hero From Team\n"
+         << " (9) Display Full Team Info\n"
          << "-> ";
 }
 

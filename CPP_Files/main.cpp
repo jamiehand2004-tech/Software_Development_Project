@@ -12,7 +12,7 @@
 #include "../Header_Files/team.h"
 #include "../Header_Files/captain.h"
 #include "../Header_Files/user_system.h"
-#include "../Header_Files/menu_helpers.h"
+#include "../Header_Files/menu.h"
 
 using std::string;
 using std::cout;
@@ -52,7 +52,6 @@ int main() {
     
     // Create a team and add heroes to it
     Team justiceLeague("Justice League");
-    // assign captain status before adding so the team's copy reflects it
     hero1.setCaptainStatus(true);
     justiceLeague.addHero(hero1);
     justiceLeague.addHero(hero2);
@@ -63,7 +62,6 @@ int main() {
 
     // Create another team and add heroes to it
     Team animeHeroes("Anime Heroes");
-    // Make Luffy the captain of animeHeroes
     hero10.setCaptainStatus(true);
     animeHeroes.addHero(hero7);     
     animeHeroes.addHero(hero8);
@@ -82,24 +80,64 @@ int main() {
     teams.push_back(justiceLeague);
     teams.push_back(animeHeroes);
 
-    // --- Demonstrate permissioned operations via UserSystem ---
     UserSystem userSys;
-    // Ensure an admin user exists (register will noop if username exists)
-    userSys.registerUser("admin", "adminpass", "admin");
-    userSys.registerUser("alice", "alicepass", "user");
 
-    // Login as admin and create a hero (will persist to heroes.txt)
-    if (userSys.loginUser("admin", "adminpass")) {
-        cout << "Logged in as admin: " << userSys.getCurrentUser() << endl;
-        userSys.createHero("AdminCreatedHero", 88, 44, "None", &userSys);
-        userSys.logoutUser();
-    }
+    // NEW CODE: require login or registration before the main menu opens.
+    bool loggedIn = false;
+    while (!loggedIn) {
+        int startChoice = 0;
 
-    // Login as basic user and create a team (will persist to teams.txt)
-    if (userSys.loginUser("alice", "alicepass")) {
-        cout << "Logged in as user: " << userSys.getCurrentUser() << endl;
-        userSys.createTeam("Alice's Squad", &userSys);
-        userSys.logoutUser();
+        cout << "\nLogin Menu:\n (1) Login\n (2) Register\n (3) Exit\n-> ";
+
+        if (!(cin >> startChoice)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
+
+        cin.ignore(10000, '\n');
+
+        if (startChoice == 1) {
+            string username;
+            string password;
+
+            cout << "Username: ";
+            getline(cin, username);
+            cout << "Password: ";
+            getline(cin, password);
+
+            if (userSys.loginUser(username, password)) {
+                cout << "Logged in as user: " << userSys.getCurrentUser() << endl;
+                loggedIn = true;
+            }
+            else {
+                cout << "Login failed. Try again." << endl;
+            }
+        }
+
+        else if (startChoice == 2) {
+            string username;
+            string password;
+
+            cout << "Choose username: ";
+            getline(cin, username);
+            cout << "Choose password: ";
+            getline(cin, password);
+
+            if (username.empty() || password.empty()) {
+                cout << "Username and password cannot be empty." << endl;
+            }
+            else if (userSys.registerUser(username, password, "user")) {
+                cout << "User registered successfully. You can now log in." << endl;
+            }
+            else {
+                cout << "That username already exists." << endl;
+            }
+        }
+
+        else if (startChoice == 3) {
+            return 0;
+        }
     }
 
     // Simple CLI loop
@@ -107,44 +145,60 @@ int main() {
 
     while (running) {
 
-        // NEW CODE: menu print moved into a helper.
+        // NEW CODE: show the currently logged-in user.
+        cout << "\nCurrent User: " << userSys.getCurrentUser() << endl;
+
         showMainMenu();
 
         int choice = 0;
         if (!(cin >> choice)) 
         { 
-            cin.clear(); cin.ignore(10000, '\n'); continue; 
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue; 
         }
 
         cin.ignore(10000, '\n');
 
         if (choice == 1) {
-            // NEW CODE: fixed listing so it includes the first team.
             listTeamsFromMenu(teams);
         } 
 
         else if (choice == 2) 
         {
-            // NEW CODE: fixed team selection so the number shown to the user matches the team chosen.
             addHeroToTeamFromMenu(teams);
         } 
 
         else if (choice == 3) 
         {
-            string fname; cout << "Save filename: "; getline(cin, fname);
+            string fname;
+            cout << "Save filename: ";
+            getline(cin, fname);
+
             if (fname.empty()) fname = "teams_state.txt";
+
             ofstream ofs(fname);
-            for (const auto &t : teams) t.save(ofs);
+            for (const auto &t : teams) {
+                t.save(ofs);
+            }
             ofs.close();
             cout << "Saved to " << fname << endl;
         } 
 
         else if (choice == 4) 
         {
-            string fname; cout << "Load filename: "; getline(cin, fname);
+            string fname;
+            cout << "Load filename: ";
+            getline(cin, fname);
+
             if (fname.empty()) fname = "teams_state.txt";
+
             ifstream ifs(fname);
-            if (!ifs.is_open()) { cout << "Cannot open file\n"; continue; }
+            if (!ifs.is_open()) {
+                cout << "Cannot open file\n";
+                continue;
+            }
+
             teams.clear();
             while (ifs.peek() != EOF) {
                 Team t;
@@ -157,25 +211,63 @@ int main() {
 
         else if (choice == 5) 
         {
+            userSys.logoutUser();
             running = false;
         }
         
         else if (choice == 6)
         {
-            // NEW CODE: this implements the missing create team option.
-            createTeamFromMenu(teams);
+            string teamName;
+            bool duplicateTeam = false;
+
+            cout << "Enter team name: ";
+            getline(cin, teamName);
+
+            if (teamName.empty()) {
+                cout << "Team name cannot be empty." << endl;
+                continue;
+            }
+
+            for (size_t i = 0; i < teams.size(); ++i) {
+                if (teams[i].getTeamName() == teamName) {
+                    duplicateTeam = true;
+                    break;
+                }
+            }
+
+            if (duplicateTeam) {
+                cout << "A team with that name already exists." << endl;
+                continue;
+            }
+
+            Team newTeam(teamName);
+            teams.push_back(newTeam);
+            cout << "Team created successfully." << endl;
         }
 
         else if (choice == 7)
         {
-            // NEW CODE: delete a full team from the teams vector.
             deleteTeamFromMenu(teams);
         }
 
         else if (choice == 8)
         {
-            // NEW CODE: delete a hero from a selected team.
             deleteHeroFromTeamFromMenu(teams);
+        }
+
+        else if (choice == 9)
+        {
+            // NEW CODE: display all teams with the full attributes of each hero.
+            if (teams.empty()) {
+                cout << "No teams available.\n";
+                continue;
+            }
+
+            for (size_t i = 0; i < teams.size(); ++i) {
+                cout << "-- Team [" << (i + 1) << "] --" << endl;
+                teams[i].displayFullTeamInfo();
+                cout << "------------------------------" << endl;
+            }
         }
 
     }

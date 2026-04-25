@@ -6,7 +6,7 @@
 #include <map>
 #include <vector>
 
-#include "admin.h"
+
 
 using std::string;
 using std::vector;
@@ -28,7 +28,7 @@ struct User {
 
 // UserSystem class to manage user registration, login, and role-based access
 // Exposes `getCurrentUserRole()` for permission checks used by Admin methods.
-class UserSystem : public Admin {
+class UserSystem {
 
 private:
 
