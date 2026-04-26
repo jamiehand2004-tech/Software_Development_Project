@@ -1,44 +1,34 @@
 {
+    "version": "2.0.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Debug C++ Project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\Software_Development_Project.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
+            "program": "${workspaceFolder}/CPP_Files/app",
+            "cwd": "${workspaceFolder}/CPP_Files",
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "c:\\MinGW\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ]
-        },
-        
-        {
-            "name": "C/C++: cl.exe build and debug active file",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}\\Software_Development_Project.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "C/C++: cl.exe build active file"
+            "miDebuggerPath": "gdb",
+            "preLaunchTask": "build-all",
+            "windows": {
+                "program": "${workspaceFolder}\\CPP_Files\\app.exe",
+                "cwd": "${workspaceFolder}\\CPP_Files",
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/CPP_Files/app",
+                "cwd": "${workspaceFolder}/CPP_Files",
+                "MIMode": "lldb",
+                "miDebuggerPath": "lldb"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/CPP_Files/app",
+                "cwd": "${workspaceFolder}/CPP_Files",
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb"
+            }
         }
-    ],
-    "version": "2.0.0"
-    //"version": "0.2.0"
+    ]
 }

@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 #include <vector>
-#include "admin.h"
+
+
 
 using std::string;
 using std::vector;
@@ -15,8 +17,9 @@ using std::ios;
 using std::cerr;
 using std::cin;
 using std::pair;
+using std::map;
 
-
+// User structure to hold user information
 struct User {
     string username;
     string password;
@@ -25,29 +28,34 @@ struct User {
 
 };
 
+// UserSystem class to manage user registration, login, and role-based access
+// Exposes `getCurrentUserRole()` for permission checks used by Admin methods.
 class UserSystem {
 
 private:
 
-    vector<pair<string, User>> users;
+// User management
+    map<string, User> users;
     string currentUser;
     
 
 public:
+
+// Constructors
     UserSystem();
     void loadUsers();
     void saveUsers();
 
+// General functions
     bool registerUser(const string & username, const string password, const string role);
-    
     bool loginUser(const string & username, const string & password);
     void logoutUser();
     bool isAdmin();
 
-
+// Getters
     string getCurrentUser() 
         { return currentUser; }
-
+    string getCurrentUserRole();
 };
 
 #endif

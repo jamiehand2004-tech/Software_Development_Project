@@ -1,8 +1,8 @@
-#include "user_system.h"
-#include "admin.h"
-#include "hero.h"
-#include "team.h"
-#include "captain.h"
+#include "../Header_Files/user_system.h"
+#include "../Header_Files/hero.h"
+#include "../Header_Files/team.h"
+#include "../Header_Files/captain.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,30 +15,34 @@ using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
-using std::find_if;
 
-
+// UserSystem implementation
 UserSystem::UserSystem() {
     loadUsers();
 }
 
+// Load users from a file
 void UserSystem::loadUsers() {
+
     ifstream file("users.txt");
     if (!file.is_open()) {
-        cerr << "Error opening users file." << endl;
+        ofstream createFile("users.txt");
+        createFile.close();
         return;
-        users.clear();
-        while (!file.eof()){
-            User u;
-            file >> u.username >> u.password >> u.role;
-            if (!u.username.empty()) 
-                users[u.username] = u;
-        }
+    }
+
+    users.clear();
+    while (file) {
+        User u;
+        if (!(file >> u.username >> u.password >> u.role)) break;
+        if (!u.username.empty())
+            users[u.username] = u;
     }
     file.close();
-    // Load users from a file (not implemented here)
+    // Load users from a file
 }
 
+// Save users to a file
 void UserSystem::saveUsers() {
     ofstream file("users.txt");
     for (auto & pair : users){
@@ -50,33 +54,31 @@ void UserSystem::saveUsers() {
     // Save users to a file (not implemented here)
 }
 
+// Register a new user
 bool UserSystem::registerUser(const string & username, const string password, const string role) {
-    auto it = find_if(users.begin(), users.end(),
-        [&username](const auto& pair) { return pair.first == username; });
-    if (it != users.end()) {
+    if (users.count(username)) {
         return false; // Username already exists
     }
-    users.push_back({username, {username, password, role}});
+    users[username] = {username, password, role};
     saveUsers(); // Save the updated user list
     return true;
 }
 
+// Login a user
 bool UserSystem::loginUser(const string & username, const string & password) {
-    auto it = find_if(users.begin(), users.end(),
-        [&username](const auto& pair) { return pair.first == username; });
-    if (it != users.end() && it->second.password == password) {
+    if (users.count(username) && users[username].password == password) {
         currentUser = username;
         return true; // Login successful
     }
     return false; // Login failed
 }
 
+// Logout the current user
 void UserSystem::logoutUser() {
     currentUser.clear();
-    
-
 }
 
+// Check if the current user is an admin
 bool UserSystem::isAdmin() {
     for (const auto& user : users) {
         if (user.first == currentUser && user.second.role == "admin") {
@@ -84,4 +86,11 @@ bool UserSystem::isAdmin() {
         }
     }
     return false;
+}
+
+// Return the role string for the current user (empty if none)
+string UserSystem::getCurrentUserRole() {
+    if (currentUser.empty()) return string();
+    if (users.count(currentUser)) return users[currentUser].role;
+    return string();
 }

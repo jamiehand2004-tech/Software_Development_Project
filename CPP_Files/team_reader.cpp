@@ -1,4 +1,4 @@
-#include "team_reader.h"
+#include "../Header_Files/team_reader.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -12,12 +12,20 @@ using std::endl;
 using std::getline;
 using std::cerr;
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
+
+// Function to load squads from a file
+// Expects file format where each squad is represented by a text line,
+// followed by a line with an integer option count, then that many option lines,
+// and a separator line "----". Returns an empty vector on error.
 vector<Squad> loadSquad(const string & filename) {
     vector<Squad> squads;
     ifstream file(filename);
     
     if (!file.is_open()) {
-        cerr << "Error opening file: " << filename << endl;
+        cerr << RED << "Error opening file: " << filename << endl << RESET;
         return squads; // Return empty vector on failure
     }
 
@@ -29,7 +37,7 @@ vector<Squad> loadSquad(const string & filename) {
 
         int optionsCount;
         if (!(file >> optionsCount)) {
-            cerr << "Error reading options count for squad: " << squad.text << endl;
+            cerr << RED << "Error reading options count for squad: " << squad.text << endl << RESET;
             break; // Error reading options count
         }
         file.ignore(); // Ignore the rest of the line
@@ -41,18 +49,19 @@ vector<Squad> loadSquad(const string & filename) {
         for (int i = 0; i < optionsCount; ++i) {
             string option;
             if (!getline(file, option)) {
-                cerr << "Error reading option " << i + 1 << " for squad: " << squad.text << endl;
+                cerr << RED << "Error reading option " << i + 1 << " for squad: " << squad.text << endl << RESET;
                 break; // Error reading option
-                squads.push_back(squad);
             }
-        }   
+            squad.options.push_back(option);
+        }
 
-        
         string separator;
         if (!getline(file, separator) || separator != "----") {
-            cerr << "Error reading separator after squad: " << squad.text << endl;
+            cerr << RED << "Error reading separator after squad: " << squad.text << endl << RESET;
             break; // Error reading separator
         }
+
+        squads.push_back(squad);
     }
     return squads;
 }
