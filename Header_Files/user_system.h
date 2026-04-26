@@ -6,6 +6,8 @@
 #include <map>
 #include <vector>
 
+
+
 using std::string;
 using std::vector;
 using std::cout;
@@ -25,8 +27,8 @@ struct User {
 };
 
 // UserSystem class to manage user registration, login, and role-based access
-
-class UserSystem : public Admin {
+// Exposes `getCurrentUserRole()` for permission checks used by Admin methods.
+class UserSystem {
 
 private:
 
@@ -51,6 +53,7 @@ public:
 // Getters
     string getCurrentUser() 
         { return currentUser; }
+    string getCurrentUserRole();
 };
 
 #endif

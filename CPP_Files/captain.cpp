@@ -1,6 +1,10 @@
-#include "captain.h"
+#include "../Header_Files/captain.h"
 #include <iostream>
-#include "team.h"
+#include "../Header_Files/team.h"
+
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
 
 // Default constructor
 Captain::Captain() {
@@ -19,7 +23,7 @@ Captain::Captain(const std::string &name, Team* t, int count) {
 // General functions
 bool Captain::isMultipleCaptains() {
     if (captainCount > 1) {
-        std::cout << "Warning: More than one captain created. Captain count: " << captainCount << std::endl;
+        std::cout << RED << "Warning: More than one captain created. Captain count: " << captainCount << std::endl << RESET;
         return true;
     }
     return false;
@@ -28,7 +32,7 @@ bool Captain::isMultipleCaptains() {
 // Assign a hero as the captain of a team
 void Captain::displayCaptainInfo() {
     if (!team) {
-        std::cout << "No team assigned to this captain." << std::endl;
+        std::cout << RED << "No team assigned to this captain." << std::endl << RESET;
         return;
     }
     std::cout << "Captain Name: " << captainName << std::endl;

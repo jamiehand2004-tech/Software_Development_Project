@@ -1,8 +1,7 @@
-#include "user_system.h"
-#include "admin.h"
-#include "hero.h"
-#include "team.h"
-#include "captain.h"
+#include "../Header_Files/user_system.h"
+#include "../Header_Files/hero.h"
+#include "../Header_Files/team.h"
+#include "../Header_Files/captain.h"
 
 #include <iostream>
 #include <string>
@@ -24,9 +23,11 @@ UserSystem::UserSystem() {
 
 // Load users from a file
 void UserSystem::loadUsers() {
+
     ifstream file("users.txt");
     if (!file.is_open()) {
-        cerr << "Error opening users file." << endl;
+        ofstream createFile("users.txt");
+        createFile.close();
         return;
     }
 
@@ -85,4 +86,11 @@ bool UserSystem::isAdmin() {
         }
     }
     return false;
+}
+
+// Return the role string for the current user (empty if none)
+string UserSystem::getCurrentUserRole() {
+    if (currentUser.empty()) return string();
+    if (users.count(currentUser)) return users[currentUser].role;
+    return string();
 }
