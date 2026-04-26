@@ -1,0 +1,115 @@
+WHITE BOX TEST PLAN
+Hero Agency Project
+
+1. Objective
+This white box test plan focuses on internal control flow, decision points, and high-risk execution paths in the current codebase. The aim is to show that the project is being tested against its internal logic rather than only against visible user-facing outputs.
+
+2. White Box Techniques Used
+Technique 1: Branch and Decision Coverage
+Technique 2: Basis Path Testing
+
+3. Scope
+The main functions and modules targeted by this plan are:
+- main() in CPP_Files/main.cpp
+- createTeamFromMenu(), selectTeamIndex(), addHeroToTeamFromMenu(), removeCaptainFromHeroFromMenu() in CPP_Files/menu.cpp
+- TeamSystem::addTeam(), loadFromFile(), saveToFile() in CPP_Files/team_system.cpp
+- Team::addHero(), Team::load(), Team::removeHeroByName(), Team::removeCaptainStatusFromHero() in CPP_Files/team.cpp
+- UserSystem login and registration flow in CPP_Files/user_system.cpp
+
+4. Technique 1: Branch and Decision Coverage
+Goal:
+Exercise both the true and false outcomes of important decisions in the code.
+
+Planned and implemented branch checks:
+
+- createTeamFromMenu()
+	Unique team name branch: the team should be added and the function should return true.
+	Implemented evidence: MenuTest.CreateTeamFromMenuAddsTeamWhenNameIsUnique
+
+- createTeamFromMenu()
+	Duplicate name branch: the team should not be added and the function should return false.
+	Implemented evidence: MenuTest.CreateTeamFromMenuRejectsDuplicateNames
+
+- TeamSystem::addTeam()
+	Valid team branch: team is accepted, stored, and then sorted alphabetically.
+	Implemented evidence: TeamSystemTest.AddTeamSortsAlphabetically
+
+- TeamSystem::addTeam()
+	Duplicate team branch: TeamSystemException should be thrown.
+	Implemented evidence: TeamSystemTest.DuplicateTeamThrowsCustomException
+
+- Team::addHero()
+	Space available branch: hero should be appended normally.
+	Implemented evidence: TeamTest.AddSaveLoad
+
+- Team::addHero()
+	Team full branch: hero count must remain capped at 10.
+	Implemented evidence: TeamTest.MaxHeroesLimit
+
+- Team::load()
+	Valid serialized input branch: load should succeed and preserve the saved data.
+	Implemented evidence: TeamTest.AddSaveLoad
+
+- Team::load()
+	Invalid serialized input branch: malformed data should return false through the failure path.
+	Planned additional negative test: corrupted hero-count line and malformed hero record line.
+
+5. Technique 2: Basis Path Testing
+Goal:
+Use independent execution paths through the highest-risk functions, guided by the cyclomatic complexity report.
+
+High-priority functions selected from the current CC report:
+- main() in CPP_Files/main.cpp, CC = 40
+- Team::load() in CPP_Files/team.cpp, CC = 13
+- removeCaptainFromHeroFromMenu() in CPP_Files/menu.cpp, CC = 8
+- addHeroToTeamFromMenu() in CPP_Files/menu.cpp, CC = 6
+
+Independent paths selected for testing:
+
+- Path P1: main() -> login menu -> choose Exit immediately.
+	Expected result: process exits with return code 0.
+	Implemented evidence: MainRun.Exits in run_main_test.cpp
+
+- Path P2: main() -> register new user -> login -> exit from main menu.
+	Expected result: both registration and later exit succeed without crashing.
+	Planned additional integration test.
+
+- Path P3: main() -> invalid login -> retry loop -> exit.
+	Expected result: failed login path is exercised and the program remains stable.
+	Planned additional integration test.
+
+- Path P4: main() -> team management menu -> create team -> return.
+	Expected result: team vector grows by one and control returns to the previous menu.
+	Implemented in unit form through MenuTest.CreateTeamFromMenuAddsTeamWhenNameIsUnique
+
+- Path P5: Team::load() -> valid stream -> success path.
+	Expected result: loaded object matches saved object.
+	Implemented evidence: TeamTest.AddSaveLoad
+
+- Path P6: Team::load() -> invalid stream -> failure path.
+	Expected result: function returns false without corrupting state.
+	Planned additional negative test.
+
+6. Entry Criteria
+- The project builds successfully.
+- The GoogleTest wrapper project in my_project is configured.
+- The executable and test binaries are available.
+
+7. Exit Criteria
+- All implemented automated tests pass.
+- Target branches listed above have at least one corresponding test.
+- The selected independent paths for high-risk functions are either automated or explicitly listed as planned follow-up tests.
+- The HTML report is generated successfully.
+
+8. Evidence and Artifacts
+- Unit test and CC report: my_project/build/gtest-results/index.html
+- Unified coverage, CC, and test report: my_project/build-coverage/gtest-results/index.html
+- Raw test XML files: my_project/build/gtest-results/*.xml
+- Coverage HTML: my_project/build-coverage/coverage.html
+
+9. Summary
+This plan uses two white box techniques:
+- Branch and Decision Coverage to verify both sides of important conditions.
+- Basis Path Testing to target independent paths in the most complex functions.
+
+The current automated suite already supports a significant part of this plan through MenuTest, TeamSystemTest, TeamTest, UserSystemTest, and RunMain. The remaining planned cases mainly extend negative-path coverage in main() and Team::load().
