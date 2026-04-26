@@ -14,6 +14,10 @@ using std::string;
 using std::cout;
 using std::endl;
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
+
 // Constructors
 Team::Team(string tn)
 {
@@ -56,14 +60,15 @@ void Team::addHero(Hero h) {
         teamHeroes.push_back(h);
         syncHeroCount();
     } else {
-        cout << "Cannot add more heroes to the team. Maximum limit reached." << endl;
+        cout <<RED<< "Cannot add more heroes to the team. Maximum limit reached." << endl << RESET;
     }
 };
 
 // Display team information
-void Team::displayTeamInfo() {
+void Team::displayTeamInfo() const {
     cout << "Team Name: " << teamName << endl;
     cout << "Number of Heroes: " << heroCount << endl;
+    cout << "------------------------------" << endl;
     cout << "Heroes in the Team:" << endl;
     for (const Hero &hero : teamHeroes) {
         cout << "- " << hero.getHeroName() << endl;
@@ -71,15 +76,28 @@ void Team::displayTeamInfo() {
 };
 
 // Display captain information
-void Team::displayCaptainInfo() {
+void Team::displayCaptainInfo() const {
     cout << "Captain of the Team: " << endl;
     const Hero *captain = findCaptain();
     if (captain != nullptr) {
         cout << "- " << captain->getHeroName() << endl;
         return;
     }
-    cout << "No captain assigned to this team." << endl;
-};
+    cout <<RED<< "No captain assigned to this team." << endl << RESET;
+}
+
+// Display full team information
+void Team::displayFullTeamInfo() const {
+    cout << "Team Name: " << teamName << endl;
+    cout << "Number of Heroes: " << heroCount << endl;
+    cout << "------------------------------" << endl;
+    cout << "Heroes in the Team:" << endl;
+    cout << "Hero Name | Health | Attack | Weakness | Captain Status |" << endl;
+    for (const Hero &hero : teamHeroes) {
+        cout << "- " << hero.getHeroName() <<"|" << hero.getHealth() << "|" << hero.getAttack() << "|" << hero.getWeakness() << "|" << (hero.getCaptainStatus() ? "1" : "0") << "|" << endl;
+    }
+}
+
 
 Hero* Team::findHero(const string &heroName) {
     auto it = std::find_if(teamHeroes.begin(), teamHeroes.end(),
@@ -132,6 +150,41 @@ const Hero* Team::findCaptain() const {
 
     return &(*it);
 }
+// remove a hero from the team by matching the hero name.
+bool Team::removeHeroByName(const string &heroName) {
+    auto it = std::find_if(teamHeroes.begin(), teamHeroes.end(),
+        [&heroName](const Hero &hero) {
+            return hero.getHeroName() == heroName;
+        });
+
+    if (it == teamHeroes.end()) {
+        return false;
+    }
+
+    teamHeroes.erase(it);
+    syncHeroCount();
+    return true;
+}
+// NEW CODE: removes captain status from the matching hero if they are currently the captain.
+bool Team::removeCaptainStatusFromHero(const string &heroName) {
+    Hero* hero = findHero(heroName);
+
+    if (hero == nullptr) {
+        return false;
+    }
+
+    if (!hero->getCaptainStatus()) {
+        return false;
+    }
+
+    hero->setCaptainStatus(false);
+    return true;
+}
+
+// NEW CODE: sorts heroes alphabetically using the Hero operator< overload.
+void Team::sortHeroesAlphabetically() {
+    std::sort(teamHeroes.begin(), teamHeroes.end());
+}
 
 // Save team information to a stream
 void Team::save(std::ostream &os) const {
@@ -181,4 +234,6 @@ bool Team::load(std::istream &is) {
     std::string sep;
     if (!std::getline(is, sep)) return false;
     return sep == "----";
-}
+    
+    }
+    

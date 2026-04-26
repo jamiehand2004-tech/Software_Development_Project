@@ -15,6 +15,10 @@ using std::cin;
 using std::endl;
 using std::ios;
 
+const string RED = "\033[31m";
+const string GREEN = "\033[32m";
+const string RESET = "\033[0m";
+
 void TeamSystem::sortTeamsByName() {
     std::sort(teams.begin(), teams.end(),
         [](const Squad & left, const Squad & right) {
@@ -36,7 +40,7 @@ void TeamSystem::saveToFile(const string & filename) {
     
     std::ofstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Error opening file for writing: " << filename << std::endl;
+        std::cerr << RED << "Error opening file for writing: " << filename << std::endl << RESET;
         return;
     }
 
@@ -93,7 +97,7 @@ const Squad* TeamSystem::findTeam(const string & teamName) const {
 void TeamSystem::addingTeam(const string & filename) {
     ofstream file(filename, ios::app);
     if (!file.is_open()) {
-        cerr << "Error opening file for appending: " << filename << endl;
+        cerr << RED << "Error opening file for appending: " << filename << endl << RESET;
         return;
     }
 

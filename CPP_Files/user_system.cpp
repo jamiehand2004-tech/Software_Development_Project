@@ -1,5 +1,4 @@
 #include "../Header_Files/user_system.h"
-#include "../Header_Files/admin.h"
 #include "../Header_Files/hero.h"
 #include "../Header_Files/team.h"
 #include "../Header_Files/captain.h"
@@ -24,9 +23,11 @@ UserSystem::UserSystem() {
 
 // Load users from a file
 void UserSystem::loadUsers() {
+
     ifstream file("users.txt");
     if (!file.is_open()) {
-        cerr << "Error opening users file." << endl;
+        ofstream createFile("users.txt");
+        createFile.close();
         return;
     }
 
