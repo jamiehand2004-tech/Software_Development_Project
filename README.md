@@ -27,8 +27,7 @@ Hero Agency is a C++17 console application created for COMP2604. The project man
 
 ### Activity Diagram
 
-![UML Activity Diagram](<img width="965" height="485" alt="image" src="https://github.com/user-attachments/assets/869aaf03-d673-47b8-9543-a78c8592dd9e" />
-)
+![UML Activity Diagram]()
 
 ## Project Structure
 
