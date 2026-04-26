@@ -8,14 +8,21 @@
 #include <algorithm>
 #include <fstream>
 #include <cstdlib>
+
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
 #include <windows.h>
 #include <shellapi.h>
+#endif
 
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::getline;
+using std::string;
 
 const string RED = "\033[31m";
 const string GREEN = "\033[32m";
@@ -84,12 +91,12 @@ static bool selectTeamIndex(const std::vector<Team>& teams, std::size_t& selecte
 
     if (!(cin >> displayedIndex)) {
         cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
         cout << RED << "Invalid input." << endl << RESET;
         return false;
     }
 
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 
     if (displayedIndex == 0) {
         return false;
@@ -147,27 +154,27 @@ bool addHeroToTeamFromMenu(std::vector<Team>& teams) {
     cout << "Health: ";
     if (!(cin >> health)) {
         cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
         cout << RED << "Invalid health value." << endl << RESET;
         return false;
     }
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 
     cout << "Attack: ";
     if (!(cin >> attack)) {
         cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
         cout << RED << "Invalid attack value." << endl << RESET;
         return false;
     }
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 
     cout << "Weakness: ";
     getline(cin, weakness);
 
     cout << "Is captain? (y/n): ";
     cin >> isCap;
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 
     Hero h(name, health, attack, weakness, (isCap == 'y' || isCap == 'Y'), true);
     teams[realIndex].addHero(h);
@@ -381,6 +388,7 @@ void viewFullTeamInfoFromMenu(const std::vector<Team>& teams) {
 
 // NEW CODE: opens the README file in the default application on Windows.
 void openReadMeFromMenu() {
+#ifdef _WIN32
     HINSTANCE result = ShellExecuteA(
         NULL,
         "open",
@@ -396,4 +404,23 @@ void openReadMeFromMenu() {
     else {
         cout << RED << "Error: README could not be opened." << RESET << endl;
     }
+#elif __APPLE__
+    const int result = std::system("open ../README.md");
+
+    if (result == 0) {
+        cout << GREEN << "Success: README opened." << RESET << endl;
+    }
+    else {
+        cout << RED << "Error: README could not be opened." << RESET << endl;
+    }
+#else
+    const int result = std::system("xdg-open ../README.md >/dev/null 2>&1");
+
+    if (result == 0) {
+        cout << GREEN << "Success: README opened." << RESET << endl;
+    }
+    else {
+        cout << RED << "Error: README could not be opened." << RESET << endl;
+    }
+#endif
 }

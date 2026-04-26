@@ -5,12 +5,30 @@
             "name": "Debug C++ Project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\Software_Development_Project\\CPP_Files\\app.exe",
-            "cwd": "${workspaceFolder}\\Software_Development_Project\\CPP_Files",
+            "program": "${workspaceFolder}/CPP_Files/app",
+            "cwd": "${workspaceFolder}/CPP_Files",
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\gdb.exe",
-            "preLaunchTask": "build-all"
+            "miDebuggerPath": "gdb",
+            "preLaunchTask": "build-all",
+            "windows": {
+                "program": "${workspaceFolder}\\CPP_Files\\app.exe",
+                "cwd": "${workspaceFolder}\\CPP_Files",
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/CPP_Files/app",
+                "cwd": "${workspaceFolder}/CPP_Files",
+                "MIMode": "lldb",
+                "miDebuggerPath": "lldb"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/CPP_Files/app",
+                "cwd": "${workspaceFolder}/CPP_Files",
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb"
+            }
         }
     ]
 }
