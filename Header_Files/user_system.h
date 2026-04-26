@@ -24,6 +24,8 @@ struct User {
     string username;
     string password;
     string role; // e.g., "admin", "user"
+    int userCount;
+
 };
 
 // UserSystem class to manage user registration, login, and role-based access
